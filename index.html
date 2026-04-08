@@ -24,9 +24,7 @@
     --radius: 10px;
     --shadow: 0 2px 16px rgba(28,28,46,0.08);
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   body {
     font-family: 'Lexend', sans-serif;
     background: var(--hs-bg);
@@ -34,409 +32,222 @@
     min-height: 100vh;
     font-size: 14px;
   }
-
-  /* HEADER */
   .header {
     background: var(--hs-white);
     border-bottom: 1px solid var(--hs-border);
     padding: 0 32px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 60px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px; position: sticky; top: 0; z-index: 100;
     box-shadow: 0 1px 8px rgba(28,28,46,0.06);
   }
-
-  .logo-text {
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--hs-dark);
-    letter-spacing: -0.5px;
-  }
-
+  .logo-text { font-size: 22px; font-weight: 700; color: var(--hs-dark); letter-spacing: -0.5px; }
   .logo-text span { color: var(--hs-orange); }
-
   .header-badge {
-    background: var(--hs-orange-light);
-    color: var(--hs-orange-dark);
-    font-size: 11px;
-    font-weight: 600;
-    padding: 4px 10px;
-    border-radius: 20px;
-    letter-spacing: 0.3px;
-    text-transform: uppercase;
+    background: var(--hs-orange-light); color: var(--hs-orange-dark);
+    font-size: 11px; font-weight: 600; padding: 4px 10px;
+    border-radius: 20px; letter-spacing: 0.3px; text-transform: uppercase;
   }
-
-  /* MAIN */
-  .main {
-    max-width: 1160px;
-    margin: 0 auto;
-    padding: 28px 24px;
-  }
-
-  .calculator-grid {
-    display: grid;
-    grid-template-columns: 1fr 370px;
-    gap: 20px;
-    align-items: start;
-  }
-
-  /* CARD */
+  .main { max-width: 1160px; margin: 0 auto; padding: 28px 24px; }
+  .calculator-grid { display: grid; grid-template-columns: 1fr 370px; gap: 20px; align-items: start; }
   .card {
-    background: var(--hs-white);
-    border-radius: var(--radius);
-    border: 1px solid var(--hs-border);
-    box-shadow: var(--shadow);
-    overflow: hidden;
+    background: var(--hs-white); border-radius: var(--radius);
+    border: 1px solid var(--hs-border); box-shadow: var(--shadow); overflow: hidden;
   }
-
   .card-header {
-    padding: 16px 20px;
-    border-bottom: 1px solid var(--hs-border);
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    padding: 16px 20px; border-bottom: 1px solid var(--hs-border);
+    display: flex; align-items: center; gap: 10px;
   }
-
-  .card-header h2 {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--hs-dark);
-    letter-spacing: -0.2px;
-  }
-
-  .card-header .section-count {
-    margin-left: auto;
-    font-size: 11px;
-    color: var(--hs-muted);
-  }
-
+  .card-header h2 { font-size: 14px; font-weight: 600; color: var(--hs-dark); letter-spacing: -0.2px; }
+  .card-header .section-count { margin-left: auto; font-size: 11px; color: var(--hs-muted); }
   .card-body { padding: 20px; }
-
-  /* CATEGORY GROUP */
   .category-group { margin-bottom: 24px; }
   .category-group:last-child { margin-bottom: 0; }
-
   .category-label {
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    color: var(--hs-muted);
-    margin-bottom: 10px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--hs-border);
+    font-size: 11px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.8px; color: var(--hs-muted);
+    margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--hs-border);
   }
 
-  /* OPTION ROWS */
+  /* EDITABLE — invisible by default */
+  .editable {
+    border: 1px solid transparent; border-radius: 3px; padding: 0 2px;
+    outline: none; min-width: 20px; display: inline-block; cursor: default;
+    font-size: inherit; font-weight: inherit; color: inherit;
+    letter-spacing: inherit; text-transform: inherit; line-height: inherit;
+  }
+  body.edit-mode .editable { cursor: text; }
+  body.edit-mode .editable:hover { border-color: var(--hs-border); background: rgba(0,0,0,0.015); }
+  body.edit-mode .editable:focus { border-color: var(--hs-orange); background: var(--hs-white); box-shadow: 0 0 0 2px rgba(255,122,89,0.12); }
+  body.edit-mode .dark-editable:hover { border-color: rgba(255,255,255,0.2) !important; background: rgba(255,255,255,0.05) !important; }
+  body.edit-mode .dark-editable:focus { border-color: var(--hs-orange) !important; background: rgba(255,255,255,0.1) !important; box-shadow: 0 0 0 2px rgba(255,122,89,0.2) !important; color: rgba(255,255,255,0.85) !important; }
+  body.edit-mode .accent-editable:hover { border-color: rgba(255,255,255,0.3) !important; background: rgba(255,255,255,0.1) !important; }
+  body.edit-mode .accent-editable:focus { border-color: #fff !important; background: rgba(255,255,255,0.15) !important; box-shadow: none !important; color: #fff !important; }
+
   .option-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 9px 12px;
-    border-radius: 7px;
-    border: 1.5px solid transparent;
-    cursor: pointer;
-    transition: all 0.15s;
-    margin-bottom: 6px;
-    background: var(--hs-bg);
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 12px; border-radius: 7px; border: 1.5px solid transparent;
+    cursor: pointer; transition: all 0.15s; margin-bottom: 6px; background: var(--hs-bg);
   }
-
   .option-row:hover { background: var(--hs-orange-light); border-color: #FFCFC4; }
   .option-row.selected { background: var(--selected-bg); border-color: var(--selected-border); }
-
   .option-radio {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    border: 2px solid var(--hs-border);
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.15s;
+    width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--hs-border);
+    flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.15s;
   }
-
   .option-row.selected .option-radio { border-color: var(--hs-orange); background: var(--hs-orange); }
-
   .option-radio::after {
-    content: '';
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: white;
-    opacity: 0;
-    transition: opacity 0.15s;
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: white; opacity: 0; transition: opacity 0.15s;
   }
-
   .option-row.selected .option-radio::after { opacity: 1; }
-
-  .option-name {
-    flex: 1;
-    font-size: 13px;
-    color: var(--hs-dark);
-  }
-
+  .option-name { flex: 1; font-size: 13px; color: var(--hs-dark); }
   .option-row.selected .option-name { font-weight: 500; }
-
-  /* Editable range label — looks like static text */
-  .range-input {
-    flex: 1;
-    font-family: 'Lexend', sans-serif;
-    font-size: 13px;
-    color: var(--hs-dark);
-    background: transparent;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    padding: 1px 3px;
-    cursor: default;
-    transition: border-color 0.15s, background 0.15s;
-    min-width: 0;
-  }
-
-  .option-row.selected .range-input { font-weight: 500; }
-
-  .range-input:focus {
-    border-color: var(--hs-border);
-    background: var(--hs-white);
-    outline: none;
-    cursor: text;
-    font-weight: 400;
-  }
-
-  /* Discount % badge */
   .option-discount { display: flex; align-items: center; }
-
   .discount-input {
-    width: 52px;
-    text-align: center;
-    font-family: 'Lexend', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--hs-orange-dark);
-    background: transparent;
-    border: 1px solid transparent;
-    border-radius: 5px;
-    padding: 2px 4px;
-    cursor: default;
-    transition: border-color 0.15s, background 0.15s;
+    width: 52px; text-align: center; font-family: 'Lexend', sans-serif;
+    font-size: 13px; font-weight: 600; color: var(--hs-orange-dark);
+    background: transparent; border: 1px solid transparent; border-radius: 5px;
+    padding: 2px 4px; cursor: default; pointer-events: none;
   }
+  body.edit-mode .discount-input { pointer-events: auto; cursor: text; }
+  body.edit-mode .discount-input:hover { border-color: var(--hs-border); }
+  body.edit-mode .discount-input:focus { border-color: var(--hs-orange); background: var(--hs-white); outline: none; }
 
-  .discount-input:focus {
-    border-color: var(--hs-orange);
-    background: var(--hs-white);
-    outline: none;
-    cursor: text;
-  }
-
-  /* SUMMARY PANEL */
   .summary-card { position: sticky; top: 80px; }
-
-  .summary-header {
-    background: var(--hs-dark);
-    padding: 18px 20px;
-  }
-
-  .summary-header h3 {
-    font-size: 13px;
-    font-weight: 600;
-    color: white;
-    letter-spacing: -0.2px;
-  }
-
-  .summary-header p {
-    font-size: 11px;
-    color: rgba(255,255,255,0.38);
-    margin-top: 2px;
-  }
-
+  .summary-header { background: var(--hs-dark); padding: 18px 20px; }
+  .summary-header h3 { font-size: 13px; font-weight: 600; color: white; letter-spacing: -0.2px; }
+  .summary-header p { font-size: 11px; color: rgba(255,255,255,0.38); margin-top: 2px; }
   .discount-total-badge {
-    margin-top: 16px;
-    background: var(--hs-orange);
-    border-radius: 8px;
-    padding: 12px 16px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    margin-top: 16px; background: var(--hs-orange); border-radius: 8px;
+    padding: 12px 16px; display: flex; align-items: center; justify-content: space-between;
   }
-
-  .discount-total-badge .label {
-    font-size: 11px;
-    color: rgba(255,255,255,0.85);
-    font-weight: 500;
-  }
-
-  .discount-total-badge .value {
-    font-size: 24px;
-    font-weight: 700;
-    color: white;
-    letter-spacing: -0.5px;
-  }
-
-  /* SAVINGS BADGE */
+  .discount-total-badge .label { font-size: 11px; color: rgba(255,255,255,0.85); font-weight: 500; }
+  .discount-total-badge .value { font-size: 24px; font-weight: 700; color: white; letter-spacing: -0.5px; }
   .savings-badge {
-    margin-top: 8px;
-    background: var(--hs-green);
-    border-radius: 8px;
-    padding: 11px 16px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    margin-top: 8px; background: var(--hs-green); border-radius: 8px;
+    padding: 11px 16px; display: flex; align-items: center; justify-content: space-between;
   }
-
-  .savings-badge .label {
-    font-size: 11px;
-    color: rgba(255,255,255,0.85);
-    font-weight: 500;
-  }
-
-  .savings-badge .value {
-    font-size: 24px;
-    font-weight: 700;
-    color: white;
-    letter-spacing: -0.5px;
-  }
-
-  /* SUMMARY BODY */
+  .savings-badge .label { font-size: 11px; color: rgba(255,255,255,0.85); font-weight: 500; }
+  .savings-badge .value { font-size: 24px; font-weight: 700; color: white; letter-spacing: -0.5px; }
   .summary-body { padding: 16px 20px; }
-
   .summary-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px 0;
-    border-bottom: 1px solid var(--hs-border);
-    gap: 8px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 8px 0; border-bottom: 1px solid var(--hs-border); gap: 8px;
   }
-
   .summary-row:last-child { border-bottom: none; }
-
-  .summary-row .s-label {
-    font-size: 12px;
-    color: var(--hs-muted);
-    flex: 1;
-  }
-
-  .summary-row .s-value {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--hs-dark);
-  }
-
+  .summary-row .s-label { font-size: 12px; color: var(--hs-muted); flex: 1; }
+  .summary-row .s-value { font-size: 13px; font-weight: 600; color: var(--hs-dark); }
   .summary-row .s-value.highlighted { color: var(--hs-green); font-size: 14px; }
-
   .price-input-wrap { display: flex; align-items: center; gap: 3px; }
   .price-input-wrap .dollar { color: var(--hs-muted); font-size: 12px; }
-
   .price-input {
-    font-family: 'Lexend', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--hs-dark);
-    background: var(--hs-bg);
-    border: 1px solid var(--hs-border);
-    border-radius: 5px;
-    padding: 3px 6px;
-    width: 90px;
-    text-align: right;
-    transition: all 0.15s;
+    font-family: 'Lexend', sans-serif; font-size: 13px; font-weight: 600;
+    color: var(--hs-dark); background: var(--hs-bg); border: 1px solid var(--hs-border);
+    border-radius: 5px; padding: 3px 6px; width: 90px; text-align: right; transition: all 0.15s;
   }
-
   .price-input:focus { outline: none; border-color: var(--hs-orange); background: var(--hs-white); }
-
   .divider { height: 1px; background: var(--hs-border); margin: 10px 0; }
-
   .section-label {
-    font-size: 10px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.7px;
-    color: var(--hs-muted);
-    margin: 14px 0 6px;
+    font-size: 10px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.7px; color: var(--hs-muted); margin: 14px 0 6px;
   }
-
   .onboarding-fee-block {
-    background: var(--hs-bg);
-    border-radius: 8px;
-    padding: 11px 14px;
-    border: 1px solid var(--hs-border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
+    background: var(--hs-bg); border-radius: 8px; padding: 11px 14px;
+    border: 1px solid var(--hs-border); display: flex;
+    align-items: center; justify-content: space-between; gap: 8px;
   }
-
   .onboarding-fee-block .label { font-size: 12px; color: var(--hs-muted); flex: 1; }
-
-  /* TOTAL BLOCKS */
   .total-block { border-radius: 8px; padding: 13px 15px; margin-top: 8px; }
   .total-block.green { background: var(--hs-green-light); }
   .total-block.navy { background: var(--hs-dark); }
   .total-block.orange-soft { background: var(--hs-orange-light); }
-
-  .total-block .t-label {
-    font-size: 10px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
+  .total-block .t-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
   .total-block.green .t-label { color: var(--hs-green-dark); }
   .total-block.navy .t-label { color: rgba(255,255,255,0.42); }
   .total-block.orange-soft .t-label { color: var(--hs-orange-dark); }
-
-  .total-block .t-value {
-    font-size: 20px;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    margin-top: 4px;
-  }
-
+  .total-block .t-value { font-size: 20px; font-weight: 700; letter-spacing: -0.5px; margin-top: 4px; }
   .total-block.green .t-value { color: var(--hs-dark); }
   .total-block.navy .t-value { color: var(--hs-orange); }
   .total-block.orange-soft .t-value { color: var(--hs-orange-dark); }
-
   .total-block .t-sub { font-size: 11px; margin-top: 2px; }
   .total-block.green .t-sub { color: var(--hs-muted); }
   .total-block.navy .t-sub { color: rgba(255,255,255,0.3); }
   .total-block.orange-soft .t-sub { color: rgba(232,96,60,0.6); }
-
   .reset-btn {
-    font-family: 'Lexend', sans-serif;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--hs-muted);
-    background: none;
-    border: 1px solid var(--hs-border);
-    border-radius: 6px;
-    padding: 5px 12px;
-    cursor: pointer;
-    transition: all 0.15s;
-    display: block;
-    margin: 14px 0 0 auto;
+    font-family: 'Lexend', sans-serif; font-size: 12px; font-weight: 500;
+    color: var(--hs-muted); background: none; border: 1px solid var(--hs-border);
+    border-radius: 6px; padding: 5px 12px; cursor: pointer;
+    transition: all 0.15s; display: block; margin: 14px 0 0 auto;
   }
-
   .reset-btn:hover { border-color: var(--hs-orange); color: var(--hs-orange); }
 
+  /* CONFIDENTIAL BADGE — the lock is the toggle */
   .confidential-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 10px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--hs-muted);
-    background: var(--hs-bg);
-    border: 1px solid var(--hs-border);
-    border-radius: 20px;
-    padding: 3px 10px;
-    margin-bottom: 20px;
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.5px; color: var(--hs-muted); background: var(--hs-bg);
+    border: 1px solid var(--hs-border); border-radius: 24px;
+    padding: 6px 14px; margin-bottom: 20px;
+    user-select: none;
+  }
+  .lock-toggle {
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.15s;
+    display: inline-block;
+    line-height: 1;
+  }
+  .lock-toggle:active { transform: scale(0.85); }
+
+  /* Edit mode border glow on the badge so user knows it worked */
+  body.edit-mode .confidential-badge {
+    border-color: var(--hs-orange);
+    background: var(--hs-orange-light);
+    color: var(--hs-orange-dark);
   }
 
-  .confidential-badge::before { content: '🔒'; font-size: 10px; }
+  /* EDIT-ONLY CONTROLS */
+  .add-row-btn, .add-category-btn, .delete-row-btn { display: none; }
+  body.edit-mode .add-row-btn, body.edit-mode .add-category-btn { display: block; }
+  body.edit-mode .delete-row-btn { display: flex; }
+  .add-row-btn {
+    font-family: 'Lexend', sans-serif; font-size: 11px; font-weight: 500;
+    color: var(--hs-muted); background: none; border: 1px dashed var(--hs-border);
+    border-radius: 7px; padding: 7px 12px; cursor: pointer;
+    transition: all 0.15s; width: 100%; text-align: center; margin-top: 4px;
+  }
+  .add-row-btn:hover { border-color: var(--hs-orange); color: var(--hs-orange); background: var(--hs-orange-light); }
+  .add-category-btn {
+    font-family: 'Lexend', sans-serif; font-size: 11px; font-weight: 500;
+    color: var(--hs-muted); background: none; border: 1px dashed var(--hs-border);
+    border-radius: 7px; padding: 10px 12px; cursor: pointer;
+    transition: all 0.15s; width: 100%; text-align: center; margin-top: 8px;
+  }
+  .add-category-btn:hover { border-color: var(--hs-orange); color: var(--hs-orange); background: var(--hs-orange-light); }
+  .delete-row-btn {
+    width: 18px; height: 18px; border-radius: 50%; border: none;
+    background: transparent; color: var(--hs-muted); font-size: 14px;
+    cursor: pointer; align-items: center; justify-content: center;
+    opacity: 0; transition: all 0.15s; flex-shrink: 0; padding: 0; line-height: 1;
+  }
+  body.edit-mode .option-row:hover .delete-row-btn { opacity: 0.5; }
+  body.edit-mode .delete-row-btn:hover { opacity: 1 !important; color: var(--hs-orange-dark); background: var(--hs-orange-light); }
+
+  /* EDIT MODE INDICATOR */
+  .edit-indicator {
+    position: fixed; bottom: 20px; right: 20px;
+    background: var(--hs-dark); color: white;
+    font-size: 11px; font-weight: 600; padding: 8px 16px;
+    border-radius: 8px; display: none; align-items: center; gap: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25); z-index: 200; letter-spacing: 0.3px;
+  }
+  body.edit-mode .edit-indicator { display: flex; }
+  .edit-indicator .dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--hs-orange); animation: pulse 1.5s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+  .edit-indicator .hint { color: rgba(255,255,255,0.4); margin-left: 4px; }
 
   @media (max-width: 860px) {
     .calculator-grid { grid-template-columns: 1fr; }
@@ -448,166 +259,166 @@
 
 <div class="header">
   <span class="logo-text">Hub<span>Spot</span></span>
-  <span class="header-badge">Internal Use Only</span>
+  <span class="header-badge"><span class="editable">Internal Use Only</span></span>
 </div>
 
 <div class="main">
-  <div class="confidential-badge">Confidential — Internal Use Only</div>
+  <div class="confidential-badge">
+    <span class="lock-toggle" id="lock-toggle" onclick="toggleEditMode()">🔒</span>
+    <span class="editable">Confidential — Internal Use Only</span>
+  </div>
   <div class="calculator-grid">
 
-    <!-- LEFT: OPTIONS -->
     <div class="card">
       <div class="card-header">
-        <h2>2026 SMB Discounting Guidelines</h2>
-        <span class="section-count">Select one per category</span>
+        <h2><span class="editable">2026 SMB Discounting Guidelines</span></h2>
+        <span class="section-count"><span class="editable">Select one per category</span></span>
       </div>
-      <div class="card-body">
+      <div class="card-body" id="categories-container">
 
-        <!-- TIMELINE -->
         <div class="category-group">
-          <div class="category-label">Timeline to Purchase</div>
-          <div class="option-row" onclick="toggleOption(this,'timeline')">
+          <div class="category-label"><span class="editable">Timeline to Purchase</span></div>
+          <div class="option-row" onclick="toggleOption(this)">
             <div class="option-radio"></div>
-            <span class="option-name">In Month Purchase</span>
-            <div class="option-discount"><input class="discount-input" value="5%"></div>
+            <span class="option-name"><span class="editable">In Month Purchase</span></span>
+            <div class="option-discount"><input class="discount-input" value="5%" tabindex="-1"></div>
+            <button class="delete-row-btn" onclick="deleteRow(event, this)">×</button>
           </div>
-          <div class="option-row" onclick="toggleOption(this,'timeline')">
+          <div class="option-row" onclick="toggleOption(this)">
             <div class="option-radio"></div>
-            <span class="option-name">In Week Purchase</span>
-            <div class="option-discount"><input class="discount-input" value="10%"></div>
+            <span class="option-name"><span class="editable">In Week Purchase</span></span>
+            <div class="option-discount"><input class="discount-input" value="10%" tabindex="-1"></div>
+            <button class="delete-row-btn" onclick="deleteRow(event, this)">×</button>
           </div>
+          <button class="add-row-btn" onclick="addRow(this)">+ Add option</button>
         </div>
 
-        <!-- CONTRACT LENGTH -->
         <div class="category-group">
-          <div class="category-label">Contract Length</div>
-          <div class="option-row" onclick="toggleOption(this,'contract')">
+          <div class="category-label"><span class="editable">Contract Length</span></div>
+          <div class="option-row" onclick="toggleOption(this)">
             <div class="option-radio"></div>
-            <span class="option-name">2 Year Contract</span>
-            <div class="option-discount"><input class="discount-input" value="5%"></div>
+            <span class="option-name"><span class="editable">2 Year Contract</span></span>
+            <div class="option-discount"><input class="discount-input" value="5%" tabindex="-1"></div>
+            <button class="delete-row-btn" onclick="deleteRow(event, this)">×</button>
           </div>
-          <div class="option-row" onclick="toggleOption(this,'contract')">
+          <div class="option-row" onclick="toggleOption(this)">
             <div class="option-radio"></div>
-            <span class="option-name">3 Year Contract</span>
-            <div class="option-discount"><input class="discount-input" value="10%"></div>
+            <span class="option-name"><span class="editable">3 Year Contract</span></span>
+            <div class="option-discount"><input class="discount-input" value="10%" tabindex="-1"></div>
+            <button class="delete-row-btn" onclick="deleteRow(event, this)">×</button>
           </div>
+          <button class="add-row-btn" onclick="addRow(this)">+ Add option</button>
         </div>
 
-        <!-- BILLING TERMS -->
         <div class="category-group">
-          <div class="category-label">Billing Terms</div>
-          <div class="option-row" onclick="toggleOption(this,'billing')">
+          <div class="category-label"><span class="editable">Billing Terms</span></div>
+          <div class="option-row" onclick="toggleOption(this)">
             <div class="option-radio"></div>
-            <span class="option-name">Monthly</span>
-            <div class="option-discount"><input class="discount-input" value="0%"></div>
+            <span class="option-name"><span class="editable">Monthly</span></span>
+            <div class="option-discount"><input class="discount-input" value="0%" tabindex="-1"></div>
+            <button class="delete-row-btn" onclick="deleteRow(event, this)">×</button>
           </div>
-          <div class="option-row" onclick="toggleOption(this,'billing')">
+          <div class="option-row" onclick="toggleOption(this)">
             <div class="option-radio"></div>
-            <span class="option-name">Quarterly</span>
-            <div class="option-discount"><input class="discount-input" value="2.5%"></div>
+            <span class="option-name"><span class="editable">Quarterly</span></span>
+            <div class="option-discount"><input class="discount-input" value="2.5%" tabindex="-1"></div>
+            <button class="delete-row-btn" onclick="deleteRow(event, this)">×</button>
           </div>
-          <div class="option-row" onclick="toggleOption(this,'billing')">
+          <div class="option-row" onclick="toggleOption(this)">
             <div class="option-radio"></div>
-            <span class="option-name">Annual</span>
-            <div class="option-discount"><input class="discount-input" value="10%"></div>
+            <span class="option-name"><span class="editable">Annual</span></span>
+            <div class="option-discount"><input class="discount-input" value="10%" tabindex="-1"></div>
+            <button class="delete-row-btn" onclick="deleteRow(event, this)">×</button>
           </div>
+          <button class="add-row-btn" onclick="addRow(this)">+ Add option</button>
         </div>
 
-        <!-- LIST MRR DEAL SIZE — editable ranges -->
         <div class="category-group">
-          <div class="category-label">List MRR Deal Size</div>
-          <div class="option-row" onclick="toggleOption(this,'dealsize')">
+          <div class="category-label"><span class="editable">List MRR Deal Size</span></div>
+          <div class="option-row" onclick="toggleOption(this)">
             <div class="option-radio"></div>
-            <input class="range-input" value="$800 – $2,000">
-            <div class="option-discount"><input class="discount-input" value="10%"></div>
+            <span class="option-name"><span class="editable">$800 – $2,000</span></span>
+            <div class="option-discount"><input class="discount-input" value="10%" tabindex="-1"></div>
+            <button class="delete-row-btn" onclick="deleteRow(event, this)">×</button>
           </div>
-          <div class="option-row" onclick="toggleOption(this,'dealsize')">
+          <div class="option-row" onclick="toggleOption(this)">
             <div class="option-radio"></div>
-            <input class="range-input" value="$2,001 – $3,500">
-            <div class="option-discount"><input class="discount-input" value="15%"></div>
+            <span class="option-name"><span class="editable">$2,001 – $3,500</span></span>
+            <div class="option-discount"><input class="discount-input" value="15%" tabindex="-1"></div>
+            <button class="delete-row-btn" onclick="deleteRow(event, this)">×</button>
           </div>
-          <div class="option-row" onclick="toggleOption(this,'dealsize')">
+          <div class="option-row" onclick="toggleOption(this)">
             <div class="option-radio"></div>
-            <input class="range-input" value="$3,501+">
-            <div class="option-discount"><input class="discount-input" value="20%"></div>
+            <span class="option-name"><span class="editable">$3,501+</span></span>
+            <div class="option-discount"><input class="discount-input" value="20%" tabindex="-1"></div>
+            <button class="delete-row-btn" onclick="deleteRow(event, this)">×</button>
           </div>
+          <button class="add-row-btn" onclick="addRow(this)">+ Add option</button>
         </div>
 
+        <button class="add-category-btn" onclick="addCategory()">+ Add category</button>
       </div>
     </div>
 
-    <!-- RIGHT: SUMMARY -->
     <div class="summary-card">
       <div class="card">
         <div class="summary-header">
-          <h3>Live Pricing Summary</h3>
-          <p>Updates automatically as you select options</p>
-
+          <h3><span class="editable dark-editable">Live Pricing Summary</span></h3>
+          <p><span class="editable dark-editable">Updates automatically as you select options</span></p>
           <div class="discount-total-badge">
-            <span class="label">Total Discount Applied</span>
+            <span class="label"><span class="editable accent-editable">Total Discount Applied</span></span>
             <span class="value" id="total-pct">0%</span>
           </div>
-
           <div class="savings-badge">
-            <span class="label">Annual Savings</span>
+            <span class="label"><span class="editable accent-editable">Annual Savings</span></span>
             <span class="value" id="total-savings">$0.00</span>
           </div>
         </div>
-
         <div class="summary-body">
-
           <div class="summary-row">
-            <span class="s-label">List Price (per month)</span>
+            <span class="s-label"><span class="editable">List Price (per month)</span></span>
             <div class="price-input-wrap">
               <span class="dollar">$</span>
               <input class="price-input" id="list-month" value="890" oninput="recalc()">
             </div>
           </div>
           <div class="summary-row">
-            <span class="s-label">List Price (per year)</span>
+            <span class="s-label"><span class="editable">List Price (per year)</span></span>
             <span class="s-value" id="list-year">$10,680.00</span>
           </div>
-
           <div class="divider"></div>
-
           <div class="summary-row">
-            <span class="s-label">Discounted Price (per month)</span>
+            <span class="s-label"><span class="editable">Discounted Price (per month)</span></span>
             <span class="s-value highlighted" id="disc-month">$890.00</span>
           </div>
           <div class="summary-row">
-            <span class="s-label">Discounted Price (per year)</span>
+            <span class="s-label"><span class="editable">Discounted Price (per year)</span></span>
             <span class="s-value highlighted" id="disc-year">$10,680.00</span>
           </div>
-
-          <div class="section-label">Onboarding</div>
+          <div class="section-label"><span class="editable">Onboarding</span></div>
           <div class="onboarding-fee-block">
-            <span class="label">Onboarding Fee (one-time)</span>
+            <span class="label"><span class="editable">Onboarding Fee (one-time)</span></span>
             <div class="price-input-wrap">
               <span class="dollar">$</span>
               <input class="price-input" id="onboarding" value="0" oninput="recalc()">
             </div>
           </div>
-
-          <div class="section-label">Investment Summary</div>
-
+          <div class="section-label"><span class="editable">Investment Summary</span></div>
           <div class="total-block orange-soft">
-            <div class="t-label">Monthly (Excl. Onboarding)</div>
+            <div class="t-label"><span class="editable">Monthly (Excl. Onboarding)</span></div>
             <div class="t-value" id="total-monthly">$890.00</div>
-            <div class="t-sub">Discounted monthly recurring</div>
+            <div class="t-sub"><span class="editable">Discounted monthly recurring</span></div>
           </div>
-
           <div class="total-block green">
-            <div class="t-label">Annual (Excl. Onboarding)</div>
+            <div class="t-label"><span class="editable">Annual (Excl. Onboarding)</span></div>
             <div class="t-value" id="total-annual">$10,680.00</div>
-            <div class="t-sub">Discounted recurring cost only</div>
+            <div class="t-sub"><span class="editable">Discounted recurring cost only</span></div>
           </div>
-
           <div class="total-block navy">
-            <div class="t-label">Total Year 1 (Incl. Onboarding)</div>
+            <div class="t-label"><span class="editable dark-editable">Total Year 1 (Incl. Onboarding)</span></div>
             <div class="t-value" id="total-with-onboarding">$10,680.00</div>
-            <div class="t-sub">Discounted annual + full onboarding fee</div>
+            <div class="t-sub"><span class="editable dark-editable">Discounted annual + full onboarding fee</span></div>
           </div>
-
           <button class="reset-btn" onclick="resetCalc()">Reset Selections</button>
         </div>
       </div>
@@ -616,23 +427,40 @@
   </div>
 </div>
 
+<div class="edit-indicator">
+  <div class="dot"></div>
+  EDIT MODE <span class="hint">click 🔒 to lock</span>
+</div>
+
 <script>
-  function toggleOption(el, group) {
-    const body = el.closest('.card-body');
-    const siblings = body.querySelectorAll(`.option-row[onclick*="'${group}'"]`);
+  let editMode = false;
+  let groupCounter = 0;
+
+  function toggleEditMode() {
+    editMode = !editMode;
+    document.body.classList.toggle('edit-mode', editMode);
+    document.getElementById('lock-toggle').textContent = editMode ? '🔓' : '🔒';
+    document.querySelectorAll('.editable').forEach(el => {
+      el.contentEditable = editMode ? 'true' : 'false';
+    });
+    document.querySelectorAll('.discount-input').forEach(input => {
+      input.tabIndex = editMode ? 0 : -1;
+    });
+    if (!editMode) document.activeElement.blur();
+  }
+
+  function toggleOption(el) {
+    if (editMode && (el.querySelector('.editable:focus') || el.querySelector('.discount-input:focus'))) return;
+    const group = el.closest('.category-group');
+    const siblings = group.querySelectorAll('.option-row');
     const wasSelected = el.classList.contains('selected');
     siblings.forEach(s => s.classList.remove('selected'));
     if (!wasSelected) el.classList.add('selected');
     recalc();
   }
 
-  function getDiscount(input) {
-    return parseFloat(input.value.replace('%', '').trim()) || 0;
-  }
-
-  function fmt(n) {
-    return n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-  }
+  function getDiscount(input) { return parseFloat(input.value.replace('%','').trim()) || 0; }
+  function fmt(n) { return n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
 
   function recalc() {
     let totalDiscount = 0;
@@ -640,16 +468,14 @@
       totalDiscount += getDiscount(row.querySelector('.discount-input'));
     });
     totalDiscount = Math.min(totalDiscount, 100);
-
-    const listMonth = parseFloat(document.getElementById('list-month').value.replace(/[^0-9.]/g, '')) || 0;
+    const listMonth = parseFloat(document.getElementById('list-month').value.replace(/[^0-9.]/g,'')) || 0;
     const listYear = listMonth * 12;
     const multiplier = 1 - (totalDiscount / 100);
     const discMonth = listMonth * multiplier;
     const discYear = listYear * multiplier;
     const savings = listYear - discYear;
-    const onboarding = parseFloat(document.getElementById('onboarding').value.replace(/[^0-9.]/g, '')) || 0;
+    const onboarding = parseFloat(document.getElementById('onboarding').value.replace(/[^0-9.]/g,'')) || 0;
     const totalWithOnboarding = discYear + onboarding;
-
     const pctStr = totalDiscount % 1 === 0 ? totalDiscount + '%' : totalDiscount.toFixed(1) + '%';
     document.getElementById('total-pct').textContent = pctStr;
     document.getElementById('total-savings').textContent = '$' + fmt(savings);
@@ -666,31 +492,68 @@
     recalc();
   }
 
-  // Discount % inputs
-  document.querySelectorAll('.discount-input').forEach(input => {
-    input.addEventListener('click', e => e.stopPropagation());
-    input.addEventListener('mousedown', e => e.stopPropagation());
-    input.addEventListener('focus', () => { input.value = input.value.replace('%', '').trim(); });
-    input.addEventListener('blur', () => {
-      const num = parseFloat(input.value);
-      input.value = isNaN(num) ? '0%' : num + '%';
-      recalc();
+  function deleteRow(e, btn) {
+    e.stopPropagation();
+    const row = btn.closest('.option-row');
+    const wasSelected = row.classList.contains('selected');
+    row.remove();
+    if (wasSelected) recalc();
+  }
+
+  function addRow(btn) {
+    const group = btn.closest('.category-group');
+    const row = document.createElement('div');
+    row.className = 'option-row';
+    row.onclick = function() { toggleOption(this); };
+    row.innerHTML = '<div class="option-radio"></div><span class="option-name"><span class="editable" contenteditable="true">New Option</span></span><div class="option-discount"><input class="discount-input" value="0%"></div><button class="delete-row-btn" onclick="deleteRow(event, this)">×</button>';
+    group.insertBefore(row, btn);
+    initDiscountInputs(row);
+    row.querySelector('.option-name .editable').focus();
+    document.execCommand('selectAll', false, null);
+  }
+
+  function addCategory() {
+    groupCounter++;
+    const container = document.getElementById('categories-container');
+    const addCatBtn = container.querySelector('.add-category-btn');
+    const group = document.createElement('div');
+    group.className = 'category-group';
+    group.innerHTML = '<div class="category-label"><span class="editable" contenteditable="true">New Category</span></div><div class="option-row" onclick="toggleOption(this)"><div class="option-radio"></div><span class="option-name"><span class="editable" contenteditable="true">Option 1</span></span><div class="option-discount"><input class="discount-input" value="0%"></div><button class="delete-row-btn" onclick="deleteRow(event, this)">×</button></div><button class="add-row-btn" onclick="addRow(this)">+ Add option</button>';
+    container.insertBefore(group, addCatBtn);
+    initDiscountInputs(group);
+    group.querySelector('.category-label .editable').focus();
+    document.execCommand('selectAll', false, null);
+  }
+
+  function initDiscountInputs(scope) {
+    (scope || document).querySelectorAll('.discount-input').forEach(input => {
+      if (input.dataset.init) return;
+      input.dataset.init = '1';
+      input.addEventListener('click', e => e.stopPropagation());
+      input.addEventListener('mousedown', e => e.stopPropagation());
+      input.addEventListener('focus', () => { input.value = input.value.replace('%','').trim(); });
+      input.addEventListener('blur', () => {
+        const num = parseFloat(input.value);
+        input.value = isNaN(num) ? '0%' : num + '%';
+        recalc();
+      });
+      input.addEventListener('keydown', e => { if (e.key === 'Enter') input.blur(); });
     });
-    input.addEventListener('keydown', e => { if (e.key === 'Enter') input.blur(); });
+  }
+
+  document.addEventListener('click', function(e) {
+    if (editMode && (e.target.classList.contains('editable') || e.target.closest('.editable'))) e.stopPropagation();
+  }, true);
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && e.target.classList.contains('editable')) { e.preventDefault(); e.target.blur(); }
   });
 
-  // Range label inputs
-  document.querySelectorAll('.range-input').forEach(input => {
-    input.addEventListener('click', e => e.stopPropagation());
-    input.addEventListener('mousedown', e => e.stopPropagation());
-    input.addEventListener('keydown', e => { if (e.key === 'Enter') input.blur(); });
-  });
-
-  // Price inputs
   document.querySelectorAll('.price-input').forEach(input => {
     input.addEventListener('click', e => e.stopPropagation());
   });
 
+  initDiscountInputs();
   recalc();
 </script>
 </body>
