@@ -42,11 +42,13 @@
   }
   .logo-text { font-size: 22px; font-weight: 700; color: var(--hs-dark); letter-spacing: -0.5px; }
   .logo-text span { color: var(--hs-orange); }
-  .header-badge {
-    background: var(--hs-orange-light); color: var(--hs-orange-dark);
-    font-size: 11px; font-weight: 600; padding: 4px 10px;
-    border-radius: 20px; letter-spacing: 0.3px; text-transform: uppercase;
+  .lock-header {
+    font-size: 16px; cursor: pointer; transition: transform 0.15s;
+    display: inline-block; line-height: 1; opacity: 0.25;
   }
+  .lock-header:hover { opacity: 0.45; }
+  .lock-header:active { transform: scale(0.85); }
+  body.edit-mode .lock-header { opacity: 0.7; }
   .main { max-width: 1160px; margin: 0 auto; padding: 28px 24px; }
   .calculator-grid { display: grid; grid-template-columns: 1fr 370px; gap: 20px; align-items: start; }
   .card {
@@ -181,30 +183,7 @@
   }
   .reset-btn:hover { border-color: var(--hs-orange); color: var(--hs-orange); }
 
-  /* CONFIDENTIAL BADGE — the lock is the toggle */
-  .confidential-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-size: 12px; font-weight: 600; text-transform: uppercase;
-    letter-spacing: 0.5px; color: var(--hs-muted); background: var(--hs-bg);
-    border: 1px solid var(--hs-border); border-radius: 24px;
-    padding: 6px 14px; margin-bottom: 20px;
-    user-select: none;
-  }
-  .lock-toggle {
-    font-size: 16px;
-    cursor: pointer;
-    transition: transform 0.15s;
-    display: inline-block;
-    line-height: 1;
-  }
-  .lock-toggle:active { transform: scale(0.85); }
-
-  /* Edit mode border glow on the badge so user knows it worked */
-  body.edit-mode .confidential-badge {
-    border-color: var(--hs-orange);
-    background: var(--hs-orange-light);
-    color: var(--hs-orange-dark);
-  }
+  /* Lock toggle lives in header now */
 
   /* EDIT-ONLY CONTROLS */
   .add-row-btn, .add-category-btn, .delete-row-btn { display: none; }
@@ -259,14 +238,10 @@
 
 <div class="header">
   <span class="logo-text">Hub<span>Spot</span></span>
-  <span class="header-badge"><span class="editable">Internal Use Only</span></span>
+  <span class="lock-header" id="lock-toggle" onclick="toggleEditMode()">🔒</span>
 </div>
 
 <div class="main">
-  <div class="confidential-badge">
-    <span class="lock-toggle" id="lock-toggle" onclick="toggleEditMode()">🔒</span>
-    <span class="editable">Confidential — Internal Use Only</span>
-  </div>
   <div class="calculator-grid">
 
     <div class="card">
@@ -429,7 +404,7 @@
 
 <div class="edit-indicator">
   <div class="dot"></div>
-  EDIT MODE <span class="hint">click 🔒 to lock</span>
+  EDIT MODE <span class="hint">click 🔒 in header to lock</span>
 </div>
 
 <script>
